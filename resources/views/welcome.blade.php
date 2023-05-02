@@ -12,14 +12,23 @@
     <div class="container my-5 py-5 px-5 mx-5">
     <!-- Search input -->
     <form>
-        <input type="search" class="form-control" placeholder="Find user here" name="search">
+        <input
+        type="search"
+        class="form-control"
+        placeholder="Find user here"
+        name="search"
+        value="{{ request('search') }}"
+    >
     </form>
 
     <!-- List items -->
     <ul class="list-group mt-3">
-        @foreach ($users as $user)
-         <li class="list-group-item">{{ $user->name }}</li>
-        @endforeach
+
+        @forelse ($users as $user)
+        <li class="list-group-item">{{ $user->name }}</li>
+        @empty
+      <li class="list-group-item list-group-item-danger">User Not Found.</li>
+        @endforelse
 
 
     </ul>

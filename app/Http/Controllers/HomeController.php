@@ -7,10 +7,15 @@ use App\Models\User;
 
 class HomeController extends Controller
 {
-    public function index(){
+    public function index()
+    {
+        // Check for search input
+        if (request('search')) {
+         $users =   User::where('name', 'like', '%' . request('search') . '%')->get();
+        } else {
+          $users =  User::all();
+        }
 
-        $users = User::orderBy('id', 'desc')->get();
-        // dd($users);
         return view('welcome', compact('users'));
     }
 }
